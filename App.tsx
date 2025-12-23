@@ -17,8 +17,8 @@ import {
   Download,
   Upload
 } from 'lucide-react';
-import { TimetableEvent, DaySchedule, DurationOption, PASTEL_COLORS, DURATION_LABELS } from './types';
-import { ACTIVITY_ICONS } from './constants';
+import { TimetableEvent, DaySchedule, DurationOption, PASTEL_COLORS, DURATION_LABELS } from './types.ts';
+import { ACTIVITY_ICONS } from './constants.tsx';
 
 const formatDate = (date: Date) => date.toISOString().split('T')[0];
 
