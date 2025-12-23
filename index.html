@@ -1,10 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Little Star Planner</title>
+  
+  <!-- PWA & iOS Meta Tags -->
+  <meta name="theme-color" content="#f0f9ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Timetable">
+  
+  <title>Timetable</title>
+  
+  <!-- Manifest & Icons -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2693/2693507.png">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -12,6 +23,10 @@
       font-family: 'Quicksand', sans-serif;
       overflow: hidden;
       background-color: #f0f9ff;
+      overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+      /* iOS Safe Area handling */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
     }
     .scrollbar-hide::-webkit-scrollbar {
       display: none;
@@ -35,5 +50,18 @@
 </head>
 <body class="bg-sky-50">
   <div id="root"></div>
+  <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((registration) => {
+            console.log('ServiceWorker registration successful');
+          }, (err) => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
